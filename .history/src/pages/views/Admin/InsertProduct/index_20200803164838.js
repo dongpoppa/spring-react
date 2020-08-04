@@ -54,7 +54,7 @@ const InsertProduct = (props) => {
                     <i className="mdi mdi-24px mdi-gamepad-variant" />
                     <div className="col-md">
                       <input
-                        ref={register({ required: true })}
+                        ref={register({ required: true, pattern: '[0-9]' })}
                         type="text"
                         className="form-control"
                         name="name"
@@ -64,7 +64,9 @@ const InsertProduct = (props) => {
                         {errors.name && errors.name.type === "required" && (
                           <span>This field is required</span>
                         )}
-              
+                        {errors.name && errors.name.type === "pattern" && (
+                          <span>This field is required 1</span>
+                        )}
                       </small>
                     </div>
 

@@ -64,7 +64,9 @@ const InsertProduct = (props) => {
                         {errors.name && errors.name.type === "required" && (
                           <span>This field is required</span>
                         )}
-              
+                        {errors.name && errors.name.type === "pattern" && (
+                          <span>This field is required 1</span>
+                        )}
                       </small>
                     </div>
 
