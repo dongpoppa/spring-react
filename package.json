@@ -6,6 +6,7 @@
     "axios": "^0.19.2",
     "cra-template": "1.0.3",
     "csstype": "^2.6.2",
+    "firebase": "^7.17.1",
     "mdbreact": "^4.27.0",
     "react": "^16.13.1",
     "react-data-table-component": "^6.9.7",
