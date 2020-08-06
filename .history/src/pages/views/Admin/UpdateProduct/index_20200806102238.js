@@ -25,23 +25,20 @@ const UpdateProduct = (props) => {
         console.log(error);
       },
       async () => {
-        storage
+        const url = await storage
           .ref("games_image")
           .child(getImage.name)
-          .getDownloadURL().then(url => setImageUrl(url));
+          .getDownloadURL();
+          setImageUrl(url);
           });
-    
-    const setThis = async () => {
-      console.log(getImageUrl);
-      const defaultValue = {
-        id: props.gameUpdate.id,
-        categories: selected.map((item) => item.object),
-        image: getImageUrl === null ? props.gameUpdate.image : getImageUrl,
-      };
-      const newGame = Object.assign(data, defaultValue);
-      props.onUpdateGame(newGame);
-    }
-    setThis();
+    console.log(getImageUrl);
+    const defaultValue = await {
+      id: props.gameUpdate.id,
+      categories: selected.map((item) => item.object),
+      image: getImageUrl === null ? props.gameUpdate.image : getImageUrl,
+    };
+    const newGame = Object.assign(data, defaultValue);
+    props.onUpdateGame(newGame);
   };
 
   const handleChange = (e) => {

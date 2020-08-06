@@ -14,7 +14,7 @@ const UpdateProduct = (props) => {
   const [getImageUrl, setImageUrl] = useState(props.gameUpdate.image);
   const [getImage, setImage] = useState(null);
 
-  const onSubmitHandle = (data) => {
+  const onSubmitHandle = async (data) => {
     const uploadTask = storage
       .ref(`games_image/${getImage.name}`)
       .put(getImage);
@@ -30,18 +30,10 @@ const UpdateProduct = (props) => {
           .child(getImage.name)
           .getDownloadURL().then(url => setImageUrl(url));
           });
-    
-    const setThis = async () => {
-      console.log(getImageUrl);
-      const defaultValue = {
-        id: props.gameUpdate.id,
-        categories: selected.map((item) => item.object),
-        image: getImageUrl === null ? props.gameUpdate.image : getImageUrl,
-      };
-      const newGame = Object.assign(data, defaultValue);
-      props.onUpdateGame(newGame);
+    console.log(getImageUrl);
+    () => {
+      
     }
-    setThis();
   };
 
   const handleChange = (e) => {

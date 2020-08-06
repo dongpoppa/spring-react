@@ -24,24 +24,24 @@ const UpdateProduct = (props) => {
       (error) => {
         console.log(error);
       },
-      async () => {
+      () => {
         storage
           .ref("games_image")
           .child(getImage.name)
-          .getDownloadURL().then(url => setImageUrl(url));
+          .getDownloadURL()
+          .then((url) => {
+            setImageUrl(url);
           });
-    
-    const setThis = async () => {
-      console.log(getImageUrl);
-      const defaultValue = {
-        id: props.gameUpdate.id,
-        categories: selected.map((item) => item.object),
-        image: getImageUrl === null ? props.gameUpdate.image : getImageUrl,
-      };
-      const newGame = Object.assign(data, defaultValue);
-      props.onUpdateGame(newGame);
-    }
-    setThis();
+      }
+    );
+    setTimeout(3000);
+    const defaultValue = {
+      id: props.gameUpdate.id,
+      categories: selected.map((item) => item.object),
+      image: getImageUrl === null ? props.gameUpdate.image : getImageUrl,
+    };
+    const newGame = Object.assign(data, defaultValue);
+    props.onUpdateGame(newGame);
   };
 
   const handleChange = (e) => {

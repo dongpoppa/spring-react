@@ -14,7 +14,7 @@ const UpdateProduct = (props) => {
   const [getImageUrl, setImageUrl] = useState(props.gameUpdate.image);
   const [getImage, setImage] = useState(null);
 
-  const onSubmitHandle = (data) => {
+  const onSubmitHandle = async (data) => {
     const uploadTask = storage
       .ref(`games_image/${getImage.name}`)
       .put(getImage);
@@ -31,7 +31,7 @@ const UpdateProduct = (props) => {
           .getDownloadURL().then(url => setImageUrl(url));
           });
     
-    const setThis = async () => {
+    const setThis = () => {
       console.log(getImageUrl);
       const defaultValue = {
         id: props.gameUpdate.id,
