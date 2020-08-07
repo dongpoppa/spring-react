@@ -17,14 +17,13 @@ const UpdateProduct = (props) => {
   const onSubmitHandle = (data) => {
     if (getImage) {
       const upload = storage.ref(`games_image/${getImage.name}`).put(getImage);
-      upload.on(() => {
-        storage
-          .ref("games_image")
-          .child(getImage.name)
-          .getDownloadURL()
-          .then((url) => setImageUrl(url))
-          .then(updateThis(data));
-      });
+      upload
+      storage
+        .ref("games_image")
+        .child(getImage.name)
+        .getDownloadURL()
+        .then((url) => setImageUrl(url))
+        .then(updateThis(data));
     } else {
       updateThis(data);
     }

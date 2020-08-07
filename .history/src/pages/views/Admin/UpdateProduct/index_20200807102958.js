@@ -11,20 +11,22 @@ const UpdateProduct = (props) => {
   });
   const [selected, setSelected] = useState(cates);
   const { register, handleSubmit, errors } = useForm();
-  const [getImageUrl, setImageUrl] = useState(props.gameUpdate.image);
-  const [getImage, setImage] = useState(null);
+
 
   const onSubmitHandle = (data) => {
     if (getImage) {
-      const upload = storage.ref(`games_image/${getImage.name}`).put(getImage);
-      upload.on(() => {
-        storage
-          .ref("games_image")
-          .child(getImage.name)
-          .getDownloadURL()
-          .then((url) => setImageUrl(url))
-          .then(updateThis(data));
-      });
+      
+      const upload = storage.ref(`games_image/${getImage.name}`);
+      upload
+        .put(getImage)
+        .then(
+          storage
+            .ref("games_image")
+            .child(getImage.name)
+            .getDownloadURL()
+            .then((url) => setImageUrl(url))
+        )
+        .then(updateThis(data));
     } else {
       updateThis(data);
     }

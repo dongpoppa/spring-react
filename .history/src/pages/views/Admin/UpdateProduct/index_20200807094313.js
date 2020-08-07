@@ -15,31 +15,36 @@ const UpdateProduct = (props) => {
   const [getImage, setImage] = useState(null);
 
   const onSubmitHandle = (data) => {
-    if (getImage) {
-      const upload = storage.ref(`games_image/${getImage.name}`).put(getImage);
-      upload.on(() => {
+    const uploadTask = storage
+      .ref(`games_image/${getImage.name}`)
+      .put(getImage);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {},
+      (error) => {
+        console.log(error);
+      },
+      () => {
         storage
           .ref("games_image")
           .child(getImage.name)
-          .getDownloadURL()
-          .then((url) => setImageUrl(url))
-          .then(updateThis(data));
-      });
-    } else {
-      updateThis(data);
-    }
-  };
-  const updateThis = (data) => {
-    const defaultValue = {
-      id: props.gameUpdate.id,
-      categories: selected.map((item) => item.object),
-      image: getImageUrl === null ? props.gameUpdate.image : getImageUrl,
-    };
+          .getDownloadURL().then(url => {
+            setImageUrl(url)
 
-    const newGame = Object.assign(data, defaultValue);
-    props.onUpdateGame(newGame);
-    alert("done!");
+          });
+          });
+    
+      console.log(getImageUrl);
+      const defaultValue = {
+        id: props.gameUpdate.id,
+        categories: selected.map((item) => item.object),
+        image: getImageUrl === null ? props.gameUpdate.image : getImageUrl,
+      };
+      const newGame = Object.assign(data, defaultValue);
+      props.onUpdateGame(newGame);
+  
   };
+
   const handleChange = (e) => {
     if (e.target.files[0]) {
       setImage(e.target.files[0]);
@@ -404,11 +409,17 @@ const UpdateProduct = (props) => {
                           name="img"
                           accept="image/*"
                           onChange={handleChange}
+                          ref={register({ required: true })}
                         />
                         <label className="custom-file-label">
                           {getImage === null ? "Choose file..." : getImage.name}
                         </label>
                       </div>
+                      <small id="nameHelp" className="form-text text-danger">
+                        {errors.img && errors.img.type === "required" && (
+                          <span>This field is required</span>
+                        )}
+                      </small>
                     </div>
                   </div>
                   <div className="border-top">
