@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import { useHistory } from 'react-router-dom';
 
+  let history = useHistory();
 const AllProduct = ({ games, deleteRow, updateGame }) => {
   //Delete handle
   const onDeleteHandle = (id, name) => {
@@ -135,7 +137,7 @@ const AllProduct = ({ games, deleteRow, updateGame }) => {
                   <MDBDataTableV5
                     hover
                     entriesOptions={[5, 20, 25]}
-                    entries={5}
+                    entries={25}
                     pagesAmount={4}
                     data={datatable}
                     pagingTop

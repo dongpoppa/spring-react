@@ -132,6 +132,7 @@ const AllProduct = ({ games, deleteRow, updateGame }) => {
             <div className="card">
               <div className="card-body">
                 <div className="table-responsive">
+                  l
                   <MDBDataTableV5
                     hover
                     entriesOptions={[5, 20, 25]}

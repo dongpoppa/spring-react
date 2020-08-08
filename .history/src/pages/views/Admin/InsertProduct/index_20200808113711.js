@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import MultiSelect from "react-multi-select-component";
 import { useForm } from "react-hook-form";
 import { storage } from "./../../../../firebase";
-import { useHistory } from 'react-router-dom';
+
 
 const InsertProduct = (props) => {
-  let history = useHistory();
   const options = props.categories;
   const { register, handleSubmit, errors } = useForm();
   const [selected, setSelected] = useState([]);
+  const [getImageUrl, setImageUrl] = useState("");
   const [getImage, setImage] = useState(null);
 
   const onSubmitHandle = (data) => {
@@ -17,14 +17,13 @@ const InsertProduct = (props) => {
       upload.getDownloadURL().then(url =>  updateThis(data,url))
     });
   };
-  const updateThis = (data,url) => {
+  const updateThis = (data) => {
     const defaultValue = {
-      image: url,
+      image: getImageUrl,
       categories: selected.map((item) => item.object),
     };
     const newGame = Object.assign(data, defaultValue);
     props.onAdd(newGame);
-    history.push('/admin/allgame');
   };
 
   const handleChange = (e) => {

@@ -30,7 +30,7 @@ const AllProduct = ({ games, deleteRow, updateGame }) => {
 
   //Update handle
   const setGameUpdate = (id) => {
-    games.filter(game => game.id === id).map(filteredGame => {
+     games.filter(game => game.id === id).map(filteredGame => {
       updateGame(filteredGame);
     });
   };
@@ -135,7 +135,7 @@ const AllProduct = ({ games, deleteRow, updateGame }) => {
                   <MDBDataTableV5
                     hover
                     entriesOptions={[5, 20, 25]}
-                    entries={5}
+                    entries={25}
                     pagesAmount={4}
                     data={datatable}
                     pagingTop

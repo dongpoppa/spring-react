@@ -24,7 +24,6 @@ const InsertProduct = (props) => {
     };
     const newGame = Object.assign(data, defaultValue);
     props.onAdd(newGame);
-    history.push('/admin/allgame');
   };
 
   const handleChange = (e) => {

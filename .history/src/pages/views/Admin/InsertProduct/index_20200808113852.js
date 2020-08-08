@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import MultiSelect from "react-multi-select-component";
 import { useForm } from "react-hook-form";
 import { storage } from "./../../../../firebase";
-import { useHistory } from 'react-router-dom';
+  let history = useHistory();
 
 const InsertProduct = (props) => {
   let history = useHistory();
@@ -24,7 +24,6 @@ const InsertProduct = (props) => {
     };
     const newGame = Object.assign(data, defaultValue);
     props.onAdd(newGame);
-    history.push('/admin/allgame');
   };
 
   const handleChange = (e) => {
