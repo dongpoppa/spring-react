@@ -61,6 +61,14 @@ function App() {
       notification("Delete", "Delete Failed!!", "danger");
     }
   };
+  const onDeleteCategoryHandle = (id) => {
+    if (categoryApi.remove(id)) {
+      setCategories(getCategories.filter((category) => category.object.id !== id));
+      notification("Delete", "Delete successfully!!", "warning");
+    } else {
+      notification("Delete", "Delete Failed!!", "danger");
+    }
+  };
   const onRestoreRowHandle = (id) => {
     if (gameApi.restore(id)) {
       setRemovedGames(getRemovedGames.filter((game) => game.id !== id));
@@ -83,7 +91,11 @@ function App() {
       notification("Update", "Update Failed!!", "danger");
     }
   };
-
+  const [getGamesByCategory, setGamesByCategory] = useState([]);
+  const onGetGamesByCategory = async (id) => {
+    const games = await  (await gameApi.getAllByCategory(id)).data;
+    setGamesByCategory(games);
+  }
   const notification = (title, message, type) => {
     store.addNotification({
       title: title,
@@ -107,10 +119,13 @@ function App() {
         removedGames={getRemovedGames}
         categories={getCategories}
         cartList={getCartList}
+        gamesByCategory={getGamesByCategory}
         onAddGameHandle={onAddHandle}
         onDeleteRowHandle={onDeleteHandle}
         onUpdateGameHandle={onUpdateGameHandle}
         onRestoreRowHandle={onRestoreRowHandle}
+        onGetGamesByCategory={onGetGamesByCategory}
+        onDeleteCategoryHandle={onDeleteCategoryHandle}
       />
     </div>
   );

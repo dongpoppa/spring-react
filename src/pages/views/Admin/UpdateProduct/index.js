@@ -24,7 +24,7 @@ const UpdateProduct = (props) => {
         upload.getDownloadURL().then((url) => updateThis(data, url));
       });
     } else {
-      updateThis(data);
+      updateThis(data, null);
     }
   };
   const updateThis = (data, url) => {
@@ -35,7 +35,7 @@ const UpdateProduct = (props) => {
     };
     const newGame = Object.assign(data, defaultValue);
     props.onUpdateGame(newGame);
-    history.push("/admin/allgame");
+    history.push("/admin/games");
   };
   const handleChange = (e) => {
     if (e.target.files[0]) {

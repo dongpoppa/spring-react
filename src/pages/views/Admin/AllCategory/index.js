@@ -5,16 +5,21 @@ import { Link } from "react-router-dom";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 
-const AllProduct = ({ games, deleteRow, updateGame, cartList }) => {
+const AllCategory = ({
+  categories,
+  deleteCategory,
+  updateCategory,
+  gamesByCategory,
+}) => {
   //Delete handle
   const onDeleteHandle = (id, name) => {
     confirmAlert({
       title: "Delete " + name,
-      message: "Are you really want to delete " + name,
+      message: "Are you really want to delete " + name +"? If you delete this category, this category will be remove from games. Can not rollback. Do you want to continues?",
       buttons: [
         {
           label: "Yes",
-          onClick: () => deleteRow(id),
+          onClick: () => deleteCategory(id),
         },
         {
           label: "No",
@@ -30,13 +35,16 @@ const AllProduct = ({ games, deleteRow, updateGame, cartList }) => {
 
   //Update handle
   const setGameUpdate = (id) => {
-    games
-      .filter((game) => game.id === id)
-      .map((filteredGame) => {
-        updateGame(filteredGame);
+    categories
+      .filter((category) => category.object.id === id)
+      .map((filteredCategory) => {
+        updateCategory(filteredCategory);
       });
   };
 
+  const setGamesByCategory = (id) => {
+    gamesByCategory(id);
+  }
   //datatable
   const datatable = {
     columns: [
@@ -46,21 +54,17 @@ const AllProduct = ({ games, deleteRow, updateGame, cartList }) => {
         sort: "able",
       },
       {
-        label: "Image",
-        field: "image",
-      },
-      {
         label: "Name",
         field: "name",
         sort: "able",
       },
       {
-        label: "Price",
-        field: "price",
+        label: "Description",
+        field: "description",
         sort: "able",
       },
       {
-        label: "Quantity",
+        label: "Games quantity",
         field: "quantity",
         sort: "able",
       },
@@ -73,17 +77,24 @@ const AllProduct = ({ games, deleteRow, updateGame, cartList }) => {
         field: "delete",
       },
     ],
-    rows: games.map((game, index) => ({
+    rows: categories.map((category, index) => ({
       index: <span key={index}>{++index}</span>,
-      image: <img src={game.image} width="auto" height="100px" />,
-      name: game.name,
-      price: game.price + " $",
-      quantity: game.quantity + " set",
+      name: category.object.name,
+      description: category.object.decription,
+      quantity: (
+        <Link
+          to={"/admin/games-by-category?name=" + category.object.name}
+          onClick={() => setGamesByCategory(category.object.id)
+          }
+        >
+          {category.object.games.length} games
+        </Link>
+      ),
       detail_update: (
         <Link
           className="btn btn-secondary"
-          to={"/admin/update?name=" + game.name}
-          onClick={() => setGameUpdate(game.id)}
+          to={"/admin/update?name=" + category.object.name}
+          onClick={() => setGameUpdate(category.object.id)}
         >
           <i className="fas fa-caret-down "></i>
         </Link>
@@ -92,7 +103,9 @@ const AllProduct = ({ games, deleteRow, updateGame, cartList }) => {
         <div>
           <button
             className="btn btn-danger"
-            onClick={() => onDeleteHandle(game.id, game.name)}
+            onClick={() =>
+              onDeleteHandle(category.object.id, category.object.name)
+            }
           >
             <i className="fa fa-trash"></i>
           </button>
@@ -106,7 +119,7 @@ const AllProduct = ({ games, deleteRow, updateGame, cartList }) => {
       <div className="page-breadcrumb">
         <div className="row">
           <div className="col-12 d-flex no-block align-items-center">
-            <h4 className="page-title">All game</h4>
+            <h4 className="page-title">All category</h4>
             <div className="ml-auto text-right">
               <nav aria-label="breadcrumb">
                 <ol className="breadcrumb">
@@ -114,7 +127,7 @@ const AllProduct = ({ games, deleteRow, updateGame, cartList }) => {
                     <a>Home</a>
                   </li>
                   <li className="breadcrumb-item active" aria-current="page">
-                    All game
+                    All category
                   </li>
                 </ol>
               </nav>
@@ -126,13 +139,12 @@ const AllProduct = ({ games, deleteRow, updateGame, cartList }) => {
         <div className="row">
           <div className="col-12">
             <div className="card">
-              <div className="card-header">
-              <Link className="btn btn-primary" to={"/admin/insert"}>
-                    Add new game
+            <div className="card-header">
+              <Link className="btn btn-primary" to={"/admin/category/insert"}>
+                    Add new category
                   </Link>
               </div>
               <div className="card-body">
-                
                 <div className="table-responsive">
                   <MDBDataTableV5
                     hover
@@ -154,4 +166,4 @@ const AllProduct = ({ games, deleteRow, updateGame, cartList }) => {
   );
 };
 
-export default AllProduct;
+export default AllCategory;

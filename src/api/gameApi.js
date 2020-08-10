@@ -8,6 +8,10 @@ const getAllRemove = () => {
   return http.get("/games-remove");
 };
 
+const getAllByCategory = (id) => {
+  return http.get(`/games-by-category/${id}`);
+};
+
 const update = (id, game) => {
   return http.put(`/games/${id}`, game);
 };
@@ -31,4 +35,5 @@ export default {
   create,
   getAllRemove,
   restore,
+  getAllByCategory,
 };

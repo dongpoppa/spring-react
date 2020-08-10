@@ -78,38 +78,48 @@ const Sidebar = (props) => {
                 </ul>
               </li>
               */}
-              
+
               <li className="sidebar-item">
-              <Link
-                      to="/admin/allgame"
-                      className="sidebar-link "
-                      aria-expanded="false"
-                    >
-                      <i className="mdi mdi-border-inside" />
-                      <span className="hide-menu">All game</span>
-                    </Link>
+                <Link
+                  to="/admin/games"
+                  className="sidebar-link "
+                  aria-expanded="false"
+                >
+                  <i className="mdi mdi-border-inside" />
+                  <span className="hide-menu">All game</span>
+                </Link>
               </li>
               <li className="sidebar-item">
-              <Link
-                      to="/admin/games-remove"
-                      className="sidebar-link "
-                      aria-expanded="false"
-                    >
-                       <i className="mdi mdi-delete" />
-                      <span className="hide-menu">All deleted game</span>
-                    </Link>
+                <Link
+                  to="/admin/games-remove"
+                  className="sidebar-link "
+                  aria-expanded="false"
+                >
+                  <i className="mdi mdi-delete" />
+                  <span className="hide-menu">All deleted game</span>
+                </Link>
               </li>
               <li className="sidebar-item">
-              <Link
-                      to="/admin/insert"
-                      className="sidebar-link "
-                      aria-expanded="false"
-                    >
-                      <i className="mdi mdi-library-plus" />
-                      <span className="hide-menu">Add game</span>
-                    </Link>
+                <Link
+                  to="/admin/categories"
+                  className="sidebar-link "
+                  aria-expanded="false"
+                >
+                  <i className="mdi mdi-delete" />
+                  <span className="hide-menu">All categories</span>
+                </Link>
               </li>
-{/* 
+              {/* <li className="sidebar-item">
+                <Link
+                  to="/admin/insert"
+                  className="sidebar-link "
+                  aria-expanded="false"
+                >
+                  <i className="mdi mdi-library-plus" />
+                  <span className="hide-menu">Add game</span>
+                </Link>
+              </li> */}
+              {/* 
               <li className="sidebar-item">
                 {" "}
                 <a
@@ -227,7 +237,6 @@ const Sidebar = (props) => {
                 </ul>
               </li>
             */}
-           
             </div>
           </ul>
         </nav>

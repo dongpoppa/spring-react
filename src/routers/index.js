@@ -13,6 +13,7 @@ import InsertProduct from "../pages/views/Admin/InsertProduct";
 import AllProduct from "../pages/views/Admin/AllProduct";
 import AllRemovedProduct from "../pages/views/Admin/AllRemoveProduct";
 import UpdateProduct from "../pages/views/Admin/UpdateProduct";
+import AllCategory from "../pages/views/Admin/AllCategory";
 
 //view
 import Home from "../pages/views/Main/Home";
@@ -22,22 +23,29 @@ import Features from "../pages/views/Main/Features";
 import ProductDetail from "../pages/views/Main/ProductDetail";
 import Cart from "../pages/views/Main/Cart";
 import Contact from "../pages/views/Main/Contact";
+import AllProductByCategory from "../pages/views/Admin/AllProductByCategory";
 
 const Routers = ({
   games,
   removedGames,
   categories,
   cartList,
+  gamesByCategory,
   onDeleteRowHandle,
   onRestoreRowHandle,
   onAddGameHandle,
   onUpdateGameHandle,
+  onGetGamesByCategory,
+  onDeleteCategoryHandle,
 }) => {
   const onAddHandle = (game) => {
     onAddGameHandle(game);
   };
   const deleteRowHandle = (id) => {
     onDeleteRowHandle(id);
+  };
+  const deleteCategoryHandle = (id) => {
+    onDeleteCategoryHandle(id);
   };
   const restoreRowHandle = (id) => {
     onRestoreRowHandle(id);
@@ -54,6 +62,10 @@ const Routers = ({
   const detailGame = (game) => {
     setDetailGame(game);
   };
+
+  const gamesByCategories = (id) => {
+    onGetGamesByCategory(id);
+  }
   return (
     <Router>
       <Switch>
@@ -73,10 +85,24 @@ const Routers = ({
                   categories={categories}
                 />
               </Route>
-              <Route path="/admin/allgame">
+              <Route path="/admin/games">
                 <AllProduct
-                
                   games={games}
+                  deleteRow={deleteRowHandle}
+                  updateGame={updateGame}
+                />
+              </Route>
+              <Route path="/admin/categories">
+                <AllCategory
+                  categories={categories}
+                  deleteCategory={deleteCategoryHandle}
+                  updateCategory={updateGame}
+                  gamesByCategory={gamesByCategories}
+                />
+              </Route>
+              <Route path="/admin/games-by-category">
+                <AllProductByCategory
+                  games={gamesByCategory}
                   deleteRow={deleteRowHandle}
                   updateGame={updateGame}
                 />

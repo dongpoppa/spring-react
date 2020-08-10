@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 
-const AllProduct = ({ games, deleteRow, updateGame, cartList }) => {
+const AllProductByCategory =  ({ games, deleteRow, updateGame, cartList }) => {
   //Delete handle
   const onDeleteHandle = (id, name) => {
     confirmAlert({
@@ -126,13 +126,7 @@ const AllProduct = ({ games, deleteRow, updateGame, cartList }) => {
         <div className="row">
           <div className="col-12">
             <div className="card">
-              <div className="card-header">
-              <Link className="btn btn-primary" to={"/admin/insert"}>
-                    Add new game
-                  </Link>
-              </div>
               <div className="card-body">
-                
                 <div className="table-responsive">
                   <MDBDataTableV5
                     hover
@@ -154,4 +148,4 @@ const AllProduct = ({ games, deleteRow, updateGame, cartList }) => {
   );
 };
 
-export default AllProduct;
+export default AllProductByCategory;

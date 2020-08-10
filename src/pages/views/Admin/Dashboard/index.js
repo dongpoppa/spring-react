@@ -27,7 +27,7 @@ const Dashboard = (props) => {
           <div className="col-12 d-flex no-block align-items-center">
             <h1>
               Total game in store:{" "}
-              <Link to="/admin/allgame"> {props.games.length}</Link>
+              <Link to="/admin/games"> {props.games.length}</Link>
             </h1>
           </div>
         </div>
